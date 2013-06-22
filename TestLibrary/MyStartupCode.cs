@@ -27,7 +27,7 @@ namespace TestLibrary
             }
 
             StartCalled = true;
-	        StartupOrder.ExecutedOrder += "Start";
+	        ExecutedCode.ExecutedOrder += "Start";
         }
 
         public static void Start2()
@@ -38,12 +38,12 @@ namespace TestLibrary
             }
 
             Start2Called = true;
-	        StartupOrder.ExecutedOrder += "Start2";
+	        ExecutedCode.ExecutedOrder += "Start2";
         }
 
         public static void Start3()
         {
-	        StartupOrder.ExecutedOrder += "Start3";
+	        ExecutedCode.ExecutedOrder += "Start3";
         }
 
         public static void CallMeAfterAppStart()
@@ -56,7 +56,7 @@ namespace TestLibrary
             }
 
             CallMeAfterAppStartCalled = true;
-	        StartupOrder.ExecutedOrder += "CallMeAfterAppStart";
+	        ExecutedCode.ExecutedOrder += "CallMeAfterAppStart";
         }
 
         public static void CallMeWhenAppEnds()
@@ -69,7 +69,7 @@ namespace TestLibrary
             }
 
             CallMeWhenAppEndsCalled = true;
-	        StartupOrder.ExecutedOrder += "CallMeWhenAppEnds";
+	        ExecutedCode.ExecutedOrder += "CallMeWhenAppEnds";
         }
     }
 }

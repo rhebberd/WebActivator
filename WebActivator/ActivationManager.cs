@@ -115,7 +115,7 @@ namespace WebActivatorEx
 		// Call the relevant activation method from all assemblies
         private static void RunActivationMethods<T>(bool designerMode = false) where T : BaseActivationMethodAttribute
         {
-			foreach (var activationMethodAttribute in GetActivationMethods<T>().OrderBy(att => att.Order))
+			foreach (var activationMethodAttribute in GetActivationMethods<T>())
 	        {
 				// Don't run it in designer mode, unless the attribute explicitly asks for that
 				if (!designerMode || activationMethodAttribute.ShouldRunInDesignerMode())
@@ -125,7 +125,7 @@ namespace WebActivatorEx
 	        }
         }
 
-		// Build and ordered collection of activation methods
+		// Build an ordered collection of activation methods
 		private static IEnumerable<BaseActivationMethodAttribute> GetActivationMethods<T>() where T : BaseActivationMethodAttribute
 		{
 			var attributes = new List<BaseActivationMethodAttribute>();
@@ -136,7 +136,9 @@ namespace WebActivatorEx
                     attributes.Add(activationAttrib);
                 }
             }
-			return attributes;
+
+			// Order across all assemblies, tie break on assembly name ascending 
+			return attributes.OrderBy(att => att.Order).ThenBy(att => att.Type.Assembly.FullName);
 		}
 
         class StartMethodCallingModule : IHttpModule

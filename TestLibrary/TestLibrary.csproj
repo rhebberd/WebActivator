@@ -47,7 +47,7 @@
   <ItemGroup>
     <Compile Include="MyStartupCode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StartupOrder.cs" />
+    <Compile Include="ExecutedCode.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WebActivator\WebActivator.csproj">
