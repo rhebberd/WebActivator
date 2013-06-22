@@ -51,6 +51,10 @@
     <Compile Include="WebActivatorUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TestLibraryAdditional\TestLibraryAdditional.csproj">
+      <Project>{068b1842-6abd-4dce-94af-22aadc8134c6}</Project>
+      <Name>TestLibraryAdditional</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TestLibrary\TestLibrary.csproj">
       <Project>{3D5B026A-2E5F-4C03-8F70-945517215017}</Project>
       <Name>TestLibrary</Name>

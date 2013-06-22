@@ -5,7 +5,7 @@ using System;
 using WebActivatorEx;
 
 [assembly: PreApplicationStartMethod(typeof(TestLibrary.MyStartupCode), "Start", RunInDesigner = true)]
-[assembly: PreApplicationStartMethod(typeof(TestLibrary.MyStartupCode), "Start2", Order = 2)]
+[assembly: PreApplicationStartMethod(typeof(TestLibrary.MyStartupCode), "Start2", Order = 3)]
 [assembly: PreApplicationStartMethod(typeof(TestLibrary.MyStartupCode), "Start3", Order = 1)]
 [assembly: PostApplicationStartMethod(typeof(TestLibrary.MyStartupCode), "CallMeAfterAppStart")]
 [assembly: ApplicationShutdownMethod(typeof(TestLibrary.MyStartupCode), "CallMeWhenAppEnds")]
@@ -14,9 +14,7 @@ namespace TestLibrary
 {
     public static class MyStartupCode
     {
-
-        public static string ExecutedOrder = "";
-        public static bool StartCalled { get; set; }
+	    public static bool StartCalled { get; set; }
         public static bool Start2Called { get; set; }
         public static bool CallMeAfterAppStartCalled { get; set; }
         public static bool CallMeWhenAppEndsCalled { get; set; }
@@ -29,7 +27,7 @@ namespace TestLibrary
             }
 
             StartCalled = true;
-            ExecutedOrder += "Start";
+	        StartupOrder.ExecutedOrder += "Start";
         }
 
         public static void Start2()
@@ -40,12 +38,12 @@ namespace TestLibrary
             }
 
             Start2Called = true;
-            ExecutedOrder += "Start2";
+	        StartupOrder.ExecutedOrder += "Start2";
         }
 
         public static void Start3()
         {
-            ExecutedOrder += "Start3";
+	        StartupOrder.ExecutedOrder += "Start3";
         }
 
         public static void CallMeAfterAppStart()
@@ -58,7 +56,7 @@ namespace TestLibrary
             }
 
             CallMeAfterAppStartCalled = true;
-            ExecutedOrder += "CallMeAfterAppStart";
+	        StartupOrder.ExecutedOrder += "CallMeAfterAppStart";
         }
 
         public static void CallMeWhenAppEnds()
@@ -71,7 +69,7 @@ namespace TestLibrary
             }
 
             CallMeWhenAppEndsCalled = true;
-            ExecutedOrder += "CallMeWhenAppEnds";
+	        StartupOrder.ExecutedOrder += "CallMeWhenAppEnds";
         }
     }
 }

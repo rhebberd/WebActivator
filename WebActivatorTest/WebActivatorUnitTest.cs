@@ -11,7 +11,7 @@ namespace WebActivatorTest
         public void TestInit()
         {
             ActivationManager.Reset();
-            MyStartupCode.ExecutedOrder = "";
+            StartupOrder.ExecutedOrder = "";
             MyStartupCode.StartCalled = false;
             MyStartupCode.Start2Called = false;
             MyStartupCode.CallMeAfterAppStartCalled = false;
@@ -71,7 +71,7 @@ namespace WebActivatorTest
         {
             ActivationManager.Run();
             ActivationManager.RunShutdownMethods();
-            Assert.AreEqual("StartStart3Start2CallMeAfterAppStartCallMeWhenAppEnds", MyStartupCode.ExecutedOrder);
+			Assert.AreEqual("StartStart3StartOrderedCodeStart2CallMeAfterAppStartCallMeWhenAppEnds", StartupOrder.ExecutedOrder);
         }
     }
 }
