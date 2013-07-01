@@ -71,7 +71,7 @@ namespace WebActivatorTest
         {
             ActivationManager.Run();
             ActivationManager.RunShutdownMethods();
-			Assert.AreEqual("StartStartCodeStart3StartOrderedCodeStart2CallMeAfterAppStartCallMeWhenAppEnds", ExecutedCode.ExecutedOrder);
+            Assert.AreEqual("Start3StartOrderedCodeStart2StartStartCodeCallMeAfterAppStartCallMeWhenAppEnds", ExecutedCode.ExecutedOrder);
         }
     }
 }

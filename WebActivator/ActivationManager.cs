@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -128,17 +129,30 @@ namespace WebActivatorEx
 		// Build an ordered collection of activation methods
 		private static IEnumerable<BaseActivationMethodAttribute> GetActivationMethods<T>() where T : BaseActivationMethodAttribute
 		{
-			var attributes = new List<BaseActivationMethodAttribute>();
+			var orderedAttribs = new List<BaseActivationMethodAttribute>();
+		    var defaultOrderAttribs = new List<BaseActivationMethodAttribute>();
             foreach (var assembly in Assemblies.Concat(AppCodeAssemblies))
             {
                 foreach (var activationAttrib in assembly.GetActivationAttributes<T>())
                 {
-                    attributes.Add(activationAttrib);
+                    if (activationAttrib.Order == 0)
+                    {
+                        defaultOrderAttribs.Add(activationAttrib);
+                    }
+                    else
+                    {
+                        orderedAttribs.Add(activationAttrib);    
+                    }                    
                 }
             }
 
-			// Order across all assemblies, tie break on assembly name ascending 
-			return attributes.OrderBy(att => att.Order).ThenBy(att => att.Type.Assembly.FullName);
+			// Order across all assemblies for attributes with a specified order, tie break on assembly name ascending 
+		    var result = orderedAttribs.OrderBy(att => att.Order).ThenBy(att => att.Type.Assembly.FullName).ToList();
+
+            // Append attributes without a specified order to the end (i.e. default order is zero so is only ordered by assembly name)
+            result.AddRange(defaultOrderAttribs.OrderBy(att => att.Type.Assembly.FullName));
+
+		    return result;
 		}
 
         class StartMethodCallingModule : IHttpModule
